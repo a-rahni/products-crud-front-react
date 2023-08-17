@@ -1,3 +1,5 @@
+dossier src/app : pour la logique applicative (ou appContexte)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

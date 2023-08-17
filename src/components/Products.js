@@ -1,29 +1,63 @@
 import { faCheckCircle, faCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { checkProduct, deleteProduct, getProducts } from '../app/app';
 
 function Products() {
 
-    const [products,setProducts] = useState(
-        [
-            {id:1, name:"computers", price:43500, checked: false },
-            {id:2, name:"Printer", price:700, checked: true },
-            {id:3, name:"Smart phone", price:5200, checked: true },
-            {id:4, name:"Mouse", price:50, checked: true }
-        ]
-    )
+    // liste vide au demarrage
+    const [products,setProducts] = useState([])
+
+    // useeffect est excecuté une fois le rendu est terminé
+    useEffect(()=>{
+        handleGetProducts();
+    },[]);
+
+    const handleGetProducts = ()=>{
+        getProducts().then(resp=>{
+            setProducts(resp.data)
+        })
+        .catch((err)=>{
+            console.error();
+        })
+
+        // axios.get("http://localhost:9000/products")
+        // .then(resp=>{
+        //     const products = resp.data;
+        //     setProducts(products);
+
+        // })
+        // .catch(err=>{
+        //     console.log(err)
+        // })
+    }
 
     const handleCheckProduct = (product)=>{
-        const newProducts = products.map(p=>{
-            if(p.id === product.id){ p.checked = !p.checked}
-            return p;
+        checkProduct(product).then(resp=>{
+            // au lieu de recharger la liste de produit, changer seulement de l'etat (single page)
+            const newProducts = products.map(p=>{
+                if(p.id === product.id){ p.checked = !p.checked}
+                return p;
+            })
+            setProducts(newProducts);
         })
-        setProducts(newProducts);
+        // const newProducts = products.map(p=>{
+        //     if(p.id === product.id){ p.checked = !p.checked}
+        //     return p;
+        // })
+        // setProducts(newProducts);
     }
 
     const handleDeleteProduct=(product)=>{
-        const newProducts = products.filter(p=>p.id != product.id);
-        setProducts(newProducts);
+        deleteProduct(product).then(resp=>{
+           // handleGetProducts();
+           // au lieu de recharger la liste de produit, supprimer seulement de l'etat de l'affichage (single page)
+           const newProducts = products.filter(p=>p.id != product.id);
+           setProducts(newProducts);
+        })
+        // const newProducts = products.filter(p=>p.id != product.id);
+        // setProducts(newProducts);
     }
 
     return (
