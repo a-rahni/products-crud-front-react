@@ -53,7 +53,7 @@ function Products() {
         deleteProduct(product).then(resp=>{
            // handleGetProducts();
            // au lieu de recharger la liste de produit, supprimer seulement de l'etat de l'affichage (single page)
-           const newProducts = products.filter(p=>p.id != product.id);
+           const newProducts = products.filter(p=>p.id !== product.id);
            setProducts(newProducts);
         })
         // const newProducts = products.filter(p=>p.id != product.id);

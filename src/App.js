@@ -5,6 +5,7 @@ import Products from './components/Products';
 import Home from './components/Home';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { useEffect, useState } from 'react';
+import NewProduct from './components/NewProduct';
 
 function App() {
   // use state: pour gerer l'etat de bouton menu activé
@@ -36,6 +37,13 @@ function App() {
               to={"/products"}>Products
             </Link>
           </li>
+          <li>
+            <Link
+              onClick={()=>setCurrentRoute("newProduct")}
+              className={currentRoute==="newProduct"? "btn btn-info ms-1": "btn btn-outline-info ms-1"} 
+              to={"/newProduct"}>NewProduct
+            </Link>
+          </li>
 
         </ul>
 
@@ -44,6 +52,7 @@ function App() {
       <Routes>
         <Route path='/home' element={<Home />}></Route>
         <Route path='/products' element={<Products />}></Route>
+        <Route path='/newProduct' element={<NewProduct />}></Route>
 
       </Routes>
     </BrowserRouter>

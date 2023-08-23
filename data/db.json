@@ -16,13 +16,13 @@
       "id": 3,
       "name": "Smart phone",
       "price": 5200,
-      "checked": false
+      "checked": true
     },
     {
-      "id": 4,
-      "name": "Mouse",
-      "price": 50,
-      "checked": true
+      "name": "hhh",
+      "price": "45",
+      "checked": false,
+      "id": 6
     }
   ]
 }
