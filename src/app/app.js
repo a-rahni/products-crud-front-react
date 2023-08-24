@@ -22,9 +22,9 @@ export const deleteProduct=(product)=>{
    return productsApi.delete(`/products/${product.id}`)
 }
 
-export const getProduct=(product)=>{
+export const getProductById=(id)=>{
     //return productsApi.delete("/products/"+product.id);
-    return productsApi.get(`/products/${product.id}`)
+    return productsApi.get(`/products/${id}`)
 }
 
 export const saveProduct=(product)=>{

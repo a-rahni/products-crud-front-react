@@ -1,12 +1,14 @@
-import { faCheckCircle, faCircle, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faCircle, faEdit, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { checkProduct, deleteProduct, getProducts } from '../app/app';
+import { useNavigate } from 'react-router-dom';
 
 function Products() {
     const[query, setQuey] = useState(""); // quand on navigue entre les page, le keyword est perdu
     // ==> faut utiliser un state globale: de contexte
+    const navigate = useNavigate(); // hook pour utiliser le system de route
 
     // liste vide au demarrage
     //const [products,setProducts] = useState([])
@@ -145,6 +147,14 @@ function Products() {
                                                     <button onClick={()=>handleDeleteProduct(product)} className='btn btn-outline-danger'>
                                                         <FontAwesomeIcon
                                                             icon={faTrash}>
+                                                        </FontAwesomeIcon>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button className='btn btn-outline-success'
+                                                    onClick={()=>navigate(`/editProduct/${product.id}`)}>
+                                                        <FontAwesomeIcon
+                                                            icon={faEdit}>
                                                         </FontAwesomeIcon>
                                                     </button>
                                                 </td>

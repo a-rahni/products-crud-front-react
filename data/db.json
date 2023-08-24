@@ -2,14 +2,14 @@
   "products": [
     {
       "id": 1,
-      "name": "computers",
+      "name": "computers hp",
       "price": 43500,
-      "checked": false
+      "checked": "on"
     },
     {
       "id": 2,
       "name": "printer",
-      "price": 700,
+      "price": "700452",
       "checked": true
     },
     {
