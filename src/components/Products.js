@@ -1,10 +1,12 @@
-import { faCheckCircle, faCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faCircle, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { checkProduct, deleteProduct, getProducts } from '../app/app';
 
 function Products() {
+    const[query, setQuey] = useState(""); // quand on navigue entre les page, le keyword est perdu
+    // ==> faut utiliser un state globale: de contexte
 
     // liste vide au demarrage
     //const [products,setProducts] = useState([])
@@ -18,9 +20,10 @@ function Products() {
         totalPages: 0, // a calculer
     });
 
-    // useeffect est excecuté une fois le rendu est terminé
+    // useeffect est excecuté une fois le rendu del page est terminé (demarrage)
     useEffect(()=>{
         //handleGetProducts();
+        // recherche avec valeur par defaut de demarrage
         handleGetProducts(searchState.keyword,searchState.currentPage,searchState.pageSize);
     },[]);
 
@@ -86,12 +89,38 @@ function Products() {
     const handleGoToPage =(page)=>{
         handleGetProducts(searchState.keyword, page, searchState.pageSize);
     }
+    
+    const handleSearch =(event)=>{
+        event.preventDefault(); // eviter de rafraichir (vider) le formulaire
+        handleGetProducts(query,1,searchState.pageSize);
+    }
 
     return (
         <div className='p-1 m-1'>
             <div className='row'>
                 <div className='col-md-6'>
-                    <div className='card'>
+                    <div className='card m-1'>
+                        <div className='card-body'>
+                                <form onSubmit={handleSearch}>
+                                    <div className='row g-2'>
+                                        <div className='col-auto'>
+                                            <input className='form-control'
+                                                value={query}
+                                                onChange={(e)=>setQuey(e.target.value)}>
+                                            </input>
+                                        </div>
+                                        <div className='col-auto'>
+                                            <button className='btn btn-success'>
+                                                <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                                                Search
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    <div className='card m-1'>
                         <div className='card-body'>
                            <table className='table'>
                                 <thead>
