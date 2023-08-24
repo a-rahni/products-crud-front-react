@@ -4,9 +4,10 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext, checkProduct, deleteProduct, getProducts } from '../app/app';
 import { useNavigate } from 'react-router-dom';
+import SearchForm from './SearchForm';
 
 function Products() {
-    const[query, setQuey] = useState(""); // quand on navigue entre les page, le keyword est perdu
+    //const[query, setQuery] = useState(""); // quand on navigue entre les page, le keyword est perdu
     // ==> faut utiliser un state globale: de contexte
     const navigate = useNavigate(); // hook pour utiliser le system de route
 
@@ -93,10 +94,7 @@ function Products() {
         handleGetProducts(searchState.keyword, page, searchState.pageSize);
     }
     
-    const handleSearch =(event)=>{
-        event.preventDefault(); // eviter de rafraichir (vider) le formulaire
-        handleGetProducts(query,1,searchState.pageSize);
-    }
+    
 
     return (
         <div className='p-1 m-1'>
@@ -104,25 +102,10 @@ function Products() {
                 <div className='col-md-6'>
                     <div className='card m-1'>
                         <div className='card-body'>
-                                <form onSubmit={handleSearch}>
-                                    <div className='row g-2'>
-                                        <div className='col-auto'>
-                                            <input className='form-control'
-                                                value={query}
-                                                onChange={(e)=>setQuey(e.target.value)}>
-                                            </input>
-                                        </div>
-                                        <div className='col-auto'>
-                                            <button className='btn btn-success'>
-                                                <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
-                                                Search
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </form>
-                            </div>
+                               <SearchForm 
+                               handleGetProducts={handleGetProducts}></SearchForm>
                         </div>
+                    </div>
                     <div className='card m-1'>
                         <div className='card-body'>
                            <table className='table'>
