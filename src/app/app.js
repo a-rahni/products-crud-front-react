@@ -8,8 +8,13 @@ export const productsApi = axios.create({
 // function getProducts(){
 //     return productsApi.get("/products");
 // }
-export const getProducts=()=>{
-    return productsApi.get("/products");
+// export const getProducts=()=>{
+//     return productsApi.get("/products");
+// }
+
+export const getProducts=(keyword="", page=1, size=4)=>{
+    // url ave parametres suivant json server
+    return productsApi.get(`/products?name_like=${keyword}&_page=${page}&_limit=${size}`);
 }
 
 export const deleteProduct=(product)=>{
