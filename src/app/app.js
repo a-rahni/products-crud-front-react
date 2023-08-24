@@ -1,4 +1,5 @@
 import axios from "axios";
+import { createContext, useState } from "react";
 
 // la logique appicative
 export const productsApi = axios.create({
@@ -41,5 +42,19 @@ export const updateProduct=(product)=>{
 }
  
 
+export const AppContext = createContext();
+
+// créer un hook personnalisé, quand useAppState est appeler , il retourne initalstate
+export const useAppState =()=>{
+    const initialState={
+        products:[],
+        currentPage: 1,
+        pageSize: 4,
+        keyword: "",
+        totalPages: 0,  
+    };
+    const appState = useState(initialState);
+    return appState;
+}
 
 

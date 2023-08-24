@@ -4,7 +4,7 @@
       "id": 1,
       "name": "computers hp",
       "price": 43500,
-      "checked": "on"
+      "checked": true
     },
     {
       "id": 2,
@@ -70,12 +70,6 @@
       "name": "ggg",
       "price": "44",
       "checked": "on",
-      "id": 14
-    },
-    {
-      "name": "ggg",
-      "price": "44",
-      "checked": "on",
       "id": 15
     },
     {
@@ -107,12 +101,6 @@
       "price": "44",
       "checked": "on",
       "id": 20
-    },
-    {
-      "name": "ggg",
-      "price": "44",
-      "checked": "on",
-      "id": 21
     }
   ]
 }

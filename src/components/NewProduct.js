@@ -39,7 +39,7 @@ const handleSaveProduct = (event)=>{
                 <input className='form-check-input' type='checkbox' 
                   onChange={(e)=>setChecked(e.target.value)}
                   checked={checked}/>
-                <label className='form-check-label' for='flexCheckChecled'>
+                <label className='form-check-label' htmlFor='flexCheckChecled'>
                   Checked
                 </label>
               </div>

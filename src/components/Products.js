@@ -1,8 +1,8 @@
 import { faCheckCircle, faCircle, faEdit, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { checkProduct, deleteProduct, getProducts } from '../app/app';
+import React, { useContext, useEffect, useState } from 'react'
+import { AppContext, checkProduct, deleteProduct, getProducts } from '../app/app';
 import { useNavigate } from 'react-router-dom';
 
 function Products() {
@@ -13,14 +13,15 @@ function Products() {
     // liste vide au demarrage
     //const [products,setProducts] = useState([])
 
-    // state recherche produit
-    const [searchState,setSearchState] = useState({
-        products:[],
-        currentPage: 1,
-        pageSize: 4,
-        keyword: "",
-        totalPages: 0, // a calculer
-    });
+    // state recherche produit: deplacé dans appcontext pour être centraliser
+    // const [searchState,setSearchState] = useState({
+    //     products:[],
+    //     currentPage: 1,
+    //     pageSize: 4,
+    //     keyword: "",
+    //     totalPages: 0, // a calculer
+    // });
+    const [searchState,setSearchState]= useContext(AppContext);
 
     // useeffect est excecuté une fois le rendu del page est terminé (demarrage)
     useEffect(()=>{
@@ -166,7 +167,7 @@ function Products() {
                            <ul className='nav nav-pills'>
                             {
                                 (new Array(searchState.totalPages).fill(0)).map((v,index)=>(
-                                    <li>
+                                    <li key={index+1}>
                                         <button 
                                         onClick={()=>handleGoToPage(index+1)}
                                         className={
